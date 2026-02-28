@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 默认（亮色）模式 */
+:root {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --bg-tertiary: #e2e8f0;
+
+  --accent-primary: #0ea5e9;
+  --accent-secondary: #f59e0b;
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+
+  --border-subtle: rgba(14, 165, 233, 0.2);
+
+  /* 向后兼容的霓虹色别名 */
+  --neon-blue: var(--accent-primary);
+  --neon-purple: #a855f7;
+  --neon-pink: #ec4899;
+}
+
+/* 暗色模式变量 */
+html.dark {
+  --bg-primary: #0a0d14;
+  --bg-secondary: #11131a;
+  --bg-tertiary: #1a1d26;
+
+  --accent-primary: #38bdf8;
+  --accent-secondary: #fbbf24;
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  --border-subtle: rgba(56, 189, 248, 0.15);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+  }
+}
+
+@layer components {
+  /* 简化文字发光效果 */
+  .glow-text {
+    text-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+  }
+
+  /* 简化边框发光效果 */
+  .glow-border {
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+    border-color: var(--border-subtle);
+  }
+
+  /* 玻璃拟态效果 - 使用新配色 */
+  .glass {
+    background: rgba(17, 19, 26, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-subtle);
+  }
+
+  /* 渐变文字 - 使用新的强调色 */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  }
+}
+
+@layer utilities {
+  /* 自定义滚动条 - 新配色 */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+    border-radius: 3px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(56, 189, 248, 0.3);
+    border-radius: 3px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(56, 189, 248, 0.5);
+  }
+
+  /* Firefox 滚动条 */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(56, 189, 248, 0.3) var(--bg-secondary);
+  }
+}
+
+/* 全局滚动条样式 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-primary);
+  opacity: 0.3;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+  opacity: 0.5;
+}
+
+/* 亮色模式滚动条 */
+html.light ::-webkit-scrollbar-thumb {
+  background: var(--accent-primary);
+  opacity: 0.4;
+}
+
+html.light ::-webkit-scrollbar-thumb:hover {
+  opacity: 0.6;
+}
+
+/* Shimmer 动画 */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
